@@ -1,0 +1,269 @@
+/* Base styles remain the same */
+* {
+  background: white;
+}
+
+h1 {
+  font-size: 150px;
+  margin: 5%;
+}
+
+#saved {
+  font-size: 50px;
+  margin-left: 40%;
+}
+
+/* Mid */
+#init {
+  top: 40%;
+  left: 300px;
+  font-size: 150px;
+  color: gray;
+  position: fixed;
+}
+
+#notesContainer {
+  margin: 5%;
+  height: 70vh;
+  width: 90vw;
+}
+
+#blank {
+  font-size: 7vmin;
+  position: absolute;
+  top: 40%;
+  left: 32%;
+  color: lightgray;
+}
+
+.note-card {
+  background: lightgray;
+  border: 3px solid #000000;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  font-size: 3vw;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.note-card h3 {
+  margin: 10px 10px 10px 35px;
+  background: transparent;
+  font-size: 4vw;
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-card p {
+  margin: 10px 10px 10px 35px;
+  background: transparent;
+  font-size: 3vw;
+  margin-top: 10px;
+  width: 50%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Delete button */
+.note-card button.delete {
+  font-size: 7vw;
+  color: red;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  text-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  outline: none;
+  box-shadow: none;
+}
+
+.note-card button.pin {
+  font-size: 4vw;
+  position: absolute;
+  background: lightgray;
+  right: 10vmin;
+  top: 3.9vmin;
+  border: none;
+  text-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.note-card button.pin:focus {
+  -webkit-tap-highlight-color: transparent;
+}
+
+i {
+  background: lightgray;
+}
+
+#add {
+  height: 200px;
+  width: 200px;
+  background: #505EF7;
+  border-radius: 50%;
+  position: fixed;
+  top: 75%;
+  left: 43%;
+  border: none;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+#add:active {
+  background: #0015FF;
+}
+
+#plus {
+  font-size: 130px;
+  background: transparent;
+  color: #CBCBCB;
+}
+
+.timestamp {
+  font-size: 2.5vw;
+  color: gray;
+  margin: 5px 10px 0 5px;
+  background: transparent;
+}
+
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+
+/* Small screens: mobile phones */
+@media (max-width: 600px) {
+  h1 {
+    font-size: 60px;
+    margin: 3%;
+  }
+
+  #saved {
+    font-size: 25px;
+    margin-left: 20%;
+  }
+
+  #init {
+    font-size: 60px;
+    left: 20px;
+  }
+
+  #blank {
+    font-size: 10vw;
+    left: 10%;
+  }
+
+  .note-card h3, .note-card p {
+    font-size: 5vw;
+    width: 70%;
+  }
+
+  .note-card button.delete {
+    font-size: 10vw;
+    top: 10px;
+    right: 10px;
+  }
+
+  .note-card button.pin {
+    font-size: 6vw;
+    right: 5vmin;
+    top: 2vmin;
+  }
+
+  #add {
+    height: 120px;
+    width: 120px;
+    top: 70%;
+    left: 40%;
+  }
+
+  #plus {
+    font-size: 60px;
+  }
+
+  .timestamp {
+    font-size: 3vw;
+  }
+}
+
+/* Medium screens: tablets */
+@media (max-width: 992px) and (min-width: 601px) {
+  h1 {
+    font-size: 100px;
+    margin: 4%;
+  }
+
+  #saved {
+    font-size: 35px;
+    margin-left: 30%;
+  }
+
+  #init {
+    font-size: 100px;
+    left: 150px;
+  }
+
+  #blank {
+    font-size: 8vmin;
+    left: 20%;
+  }
+
+  .note-card h3, .note-card p {
+    font-size: 4vw;
+    width: 60%;
+  }
+
+  .note-card button.delete {
+    font-size: 8vw;
+    top: 20px;
+    right: 20px;
+  }
+
+  .note-card button.pin {
+    font-size: 5vw;
+    right: 8vmin;
+    top: 3vmin;
+  }
+
+  #add {
+    height: 160px;
+    width: 160px;
+    top: 72%;
+    left: 42%;
+  }
+
+  #plus {
+    font-size: 100px;
+  }
+
+  .timestamp {
+    font-size: 2.8vw;
+  }
+}
+
+/* Large screens: desktops (optional fine-tuning) */
+@media (min-width: 1200px) {
+  .note-card h3, .note-card p {
+    font-size: 3vw;
+  }
+
+  .note-card button.delete {
+    font-size: 6vw;
+  }
+
+  .note-card button.pin {
+    font-size: 4vw;
+  }
+
+  #add {
+    height: 220px;
+    width: 220px;
+  }
+
+  #plus {
+    font-size: 140px;
+  }
+}
