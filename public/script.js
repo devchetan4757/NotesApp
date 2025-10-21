@@ -1,4 +1,4 @@
-// Hide/Unhide functions
+
 function hide(id) {
   const el =document.getElementById(id)
   if(el) el.style.display = 'none';
@@ -8,13 +8,13 @@ function unhide(id) {
   if(el) el.style.display = '';
 }
 
-// Notes Loader
+// Init Notes
 async function loadNotes() {
   try {
     const response = await fetch('/notes');
     const notes = await response.json();
     const container = document.getElementById('notesContainer');
-    container.innerHTML = ''; // clear old notes
+    container.innerHTML = ''; 
 
     const blank = document.getElementById('blank');
     const saved = document.getElementById('saved');
@@ -33,7 +33,7 @@ async function loadNotes() {
       const noteCard = document.createElement('div');
       noteCard.className = 'note-card';
 
-      // Content
+     
       const title = document.createElement('h3');
       title.textContent = note.title;
       title.addEventListener('click', ()=>{updateNote(note._id);
@@ -53,12 +53,11 @@ async function loadNotes() {
       pinBtn.onclick = () => pinnedNote(note._id);
       pinBtn.style.cursor = 'pointer';
 
-    // Format date nicely
+    
     // Timestamp
 const timeStamp = document.createElement('div');
 timeStamp.className = 'timestamp';
 
-// Format: "5:42 PM Â· Oct 20, 2025"
 const date = new Date(note.createdAt);
 const formattedTime = date.toLocaleString('en-US', {
   hour: 'numeric',
@@ -88,7 +87,7 @@ timeStamp.textContent = `${formattedTime} ,  ${formattedDate}`;
   }
 }
 
-// Pin note
+
 async function pinnedNote(id) {
   try {
     const res = await fetch(`/notes/${id}/pin`, { method: 'PUT' });
@@ -98,12 +97,12 @@ async function pinnedNote(id) {
     console.error(err);
   }
 }
-//Update note
+
 async function updateNote(id) {
   window.location.href=`create.html?id=${id}`;
 }
 
-// Delete note
+
 async function deleteNote(id) {
   console.log('Deleting note:', id);
   try {

@@ -114,7 +114,6 @@ app.put('/notes/:id/pin', async (req, res) => {
   }
 });
 
-// 404 fallback
 app.use((req, res) => res.status(404).send('404 - Page not found'));
 
 app.listen(PORT, () => console.log(` Server running on port ${PORT}`));

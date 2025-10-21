@@ -1,12 +1,12 @@
-// Get title and content elements
+
 const title = document.getElementById('title');
 const content = document.getElementById('content');
 
-// Get note ID from URL (if editing)
+
 const urlParams = new URLSearchParams(window.location.search);
 const noteId = urlParams.get('id');
 
-// Load existing note data when editing
+
 window.onload = async () => {
   if (noteId) {
     try {
@@ -23,12 +23,11 @@ window.onload = async () => {
   }
 };
 
-// Save note (create or update)
+// Save note
 async function saveNote() {
   const noteTitle = title.value.trim();
   const noteContent = content.value.trim();
 
-  // Validation
   if (!noteTitle) {
     alert('Please enter title');
     return;
@@ -49,7 +48,6 @@ async function saveNote() {
     const data = await response.text();
     console.log('Server response:', data);
 
-    // Go back to homepage after saving
     window.location.href = '/';
   } catch (error) {
     console.error('Error saving note:', error);

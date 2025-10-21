@@ -1,6 +1,6 @@
-/* Base styles */
+
 h1 {
-  font-size: 9vw; /* scales with viewport width */
+  font-size: 9vw;
   margin-left: 5%;
 }
 
@@ -22,7 +22,7 @@ h1 {
 }
 
 .mainBody {
-  margin-top: calc(1em + 1vw); /* dynamically based on h1 font size */
+  margin-top: calc(1em + 1vw);
   height: 71vh;
   width: 100vw;
 }
@@ -96,9 +96,8 @@ h1 {
   resize: none;
 }
 
-/* MEDIA QUERIES FOR RESPONSIVENESS */
 
-/* Small screens: mobile phones */
+/* Small screens */
 @media (max-width: 600px) {
   h1 {
     font-size: 12vw;
@@ -113,7 +112,7 @@ h1 {
   }
 
   .mainBody {
-    margin-top: calc(1em + 0.5vw); /* smaller gap for mobile */
+    margin-top: calc(1em + 0.5vw); 
   }
 
   #title, #content {
@@ -132,7 +131,7 @@ h1 {
   }
 }
 
-/* Medium screens: tablets */
+/* Medium screens */
 @media (max-width: 992px) and (min-width: 601px) {
   h1 {
     font-size: 8vw;
@@ -147,7 +146,7 @@ h1 {
   }
 
   .mainBody {
-    margin-top: calc(1em + 0.8vw); /* moderate gap for tablets */
+    margin-top: calc(1em + 0.8vw);
   }
 
   #title, #content {
@@ -166,7 +165,7 @@ h1 {
   }
 }
 
-/* Large screens: desktops */
+/* Large screens */
 @media (min-width: 1200px) {
   h1 {
     font-size: 150px;
@@ -179,7 +178,7 @@ h1 {
   }
 
   .mainBody {
-    margin-top: calc(1em + 1vw); /* default desktop gap */
+    margin-top: calc(1em + 1vw);
   }
 
   #title::placeholder, #content::placeholder {

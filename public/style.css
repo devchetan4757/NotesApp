@@ -1,4 +1,4 @@
-/* Base styles remain the same */
+
 * {
   background: white;
 }
@@ -13,7 +13,6 @@ h1 {
   margin-left: 40%;
 }
 
-/* Mid */
 #init {
   top: 40%;
   left: 300px;
@@ -132,9 +131,8 @@ i {
   background: transparent;
 }
 
-/* MEDIA QUERIES FOR RESPONSIVENESS */
 
-/* Small screens: mobile phones */
+/* Small screens */
 @media (max-width: 600px) {
   h1 {
     font-size: 60px;
@@ -189,7 +187,7 @@ i {
   }
 }
 
-/* Medium screens: tablets */
+/* Medium screens */
 @media (max-width: 992px) and (min-width: 601px) {
   h1 {
     font-size: 100px;
@@ -244,7 +242,7 @@ i {
   }
 }
 
-/* Large screens: desktops (optional fine-tuning) */
+/* Large screens */
 @media (min-width: 1200px) {
   .note-card h3, .note-card p {
     font-size: 3vw;
