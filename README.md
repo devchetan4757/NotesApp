@@ -5,14 +5,14 @@ You can **create**, **edit**, **delete**, and **pin/unpin** notes easily.
 
 ---
 
-## 🚀 Features
+##  Features
 
-✅ Create text notes with title and content  
-✅ Edit notes by clicking on their title  
-✅ Delete notes  
-✅ Pin/unpin notes to keep important ones at the top  
-✅ Responsive design for mobile and desktop  
-✅ RESTful API built with Express and MongoDB  
+• Create text notes with title and content  
+• Edit notes by clicking on their title  
+• Delete notes  
+• Pin/unpin notes to keep important ones at the top  
+• Responsive design for mobile and desktop  
+• RESTful API built with Express and MongoDB  
 
 ---
 
@@ -30,9 +30,9 @@ You can **create**, **edit**, **delete**, and **pin/unpin** notes easily.
 
 ---
 
-## ⚙️ Installation & Setup
+##  Installation & Setup
 
-### 1️⃣ Clone this repository
+###  Clone this repository
 ```bash
 git clone https://github.com/yourusername/NotesApp.git
 cd NotesApp
