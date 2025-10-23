@@ -1,4 +1,4 @@
-// src/routes/notes.js
+
 import express from "express";
 import {
   getAllNotes, getNote, createNote, updateNote, deleteNote, togglePin

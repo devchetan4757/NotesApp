@@ -1,9 +1,8 @@
-// src/controllers/noteController.js
+
 import Note from "../models/Note.js";
 
 export const getAllNotes = async (req, res, next) => {
   try {
-    // Optional: sort pinned first, then newest
     const notes = await Note.find().sort({ pinned: -1, updatedAt: -1 });
     res.json(notes);
   } catch (err) { next(err); }
@@ -46,7 +45,7 @@ export const togglePin = async (req, res, next) => {
     const note = await Note.findById(req.params.id);
     if (!note) return res.status(404).json({ message: "Note not found" });
 
-    note.pinned = !note.pinned; // Toggle pinned
+    note.pinned = !note.pinned; 
     await note.save();
     res.json(note);
   } catch (err) {

@@ -1,4 +1,4 @@
-// src/models/Note.js
+
 import mongoose from "mongoose";
 
 const NoteSchema = new mongoose.Schema({

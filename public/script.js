@@ -1,7 +1,7 @@
 const API_URL = "/api/notes";
-let editingId = null; // Track which note is being edited
+let editingId = null; 
 
-// Load and render notes
+// Load notes
 async function loadNotes() {
   try {
     const res = await fetch(API_URL);
@@ -107,6 +107,5 @@ async function togglePin(id) {
   }
 }
 
-// Event listeners
 document.getElementById("addBtn").addEventListener("click", createOrUpdateNote);
 document.addEventListener("DOMContentLoaded", loadNotes);
