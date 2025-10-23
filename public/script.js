@@ -1,117 +1,112 @@
+const API_URL = "/api/notes";
+let editingId = null; // Track which note is being edited
 
-function hide(id) {
-  const el =document.getElementById(id)
-  if(el) el.style.display = 'none';
-}
-function unhide(id) {
-  const el = document.getElementById(id)
-  if(el) el.style.display = '';
-}
-
-// Init Notes
+// Load and render notes
 async function loadNotes() {
   try {
-    const response = await fetch('/notes');
-    const notes = await response.json();
-    const container = document.getElementById('notesContainer');
-    container.innerHTML = ''; 
+    const res = await fetch(API_URL);
+    const notes = await res.json();
 
-    const blank = document.getElementById('blank');
-    const saved = document.getElementById('saved');
-
-    if (!notes || notes.length === 0) {
-      container.innerHTML='';
-      unhide('blank');
-      hide('saved');
-      return;
-    }
-
-    unhide('saved');
-    hide('blank');
+    const notesDiv = document.getElementById("notes");
+    notesDiv.innerHTML = "";
 
     notes.forEach(note => {
-      const noteCard = document.createElement('div');
-      noteCard.className = 'note-card';
+      const card = document.createElement("div");
+      card.classList.add("note-card");
+      if (note.pinned) card.classList.add("pinned");
+      if (note._id === editingId) card.classList.add("editing");
 
-     
-      const title = document.createElement('h3');
-      title.textContent = note.title;
-      title.addEventListener('click', ()=>{updateNote(note._id);
-      })
+      card.innerHTML = `
+        <h3 class="note-title">${note.title}</h3>
+        <p>${note.content}</p>
+        <div class="btn-group">
+          <button class="pin-btn">${note.pinned ? "Unpin" : "Pin"}</button>
+          <button class="delete-btn">Delete</button>
+        </div>
+      `;
 
-      const content = document.createElement('p');
-      content.textContent = note.content;
+      // Pin/unpin
+      card.querySelector(".pin-btn").addEventListener("click", () => togglePin(note._id));
 
-      const hr = document.createElement('hr');
+      // Delete
+      card.querySelector(".delete-btn").addEventListener("click", () => deleteNote(note._id));
 
-      // Pin button
-      const pinBtn = document.createElement('button');
-      pinBtn.className = 'pin';
-      pinBtn.innerHTML = note.pinned
-        ? '<i class="fa-solid fa-star"></i>'
-        : '<i class="fa-regular fa-star"></i>';
-      pinBtn.onclick = () => pinnedNote(note._id);
-      pinBtn.style.cursor = 'pointer';
+      // Edit on title click
+      card.querySelector(".note-title").addEventListener("click", () => editNote(note));
 
-    
-    // Timestamp
-const timeStamp = document.createElement('div');
-timeStamp.className = 'timestamp';
-
-const date = new Date(note.createdAt);
-const formattedTime = date.toLocaleString('en-US', {
-  hour: 'numeric',
-  minute: '2-digit',
-});
-const formattedDate = date.toLocaleString('en-US', {
-  day: 'numeric',
-  month: 'short',
-  year: 'numeric',
-});
-timeStamp.textContent = `${formattedTime} ,  ${formattedDate}`;
-
-      // Delete button
-      const delBtn = document.createElement('button');
-      delBtn.className = 'delete';
-      delBtn.textContent = '×';
-      delBtn.style.cursor = 'pointer';
-      delBtn.onclick = () => deleteNote(note._id);
-
-      // Append
-      noteCard.append(title, content, hr, pinBtn, delBtn,timeStamp);
-      container.appendChild(noteCard);
+      notesDiv.appendChild(card);
     });
-
   } catch (err) {
-    console.error('Error loading notes:', err);
+    console.error("Error loading notes:", err);
   }
 }
 
+// Create or update note
+async function createOrUpdateNote() {
+  const title = document.getElementById("title").value.trim();
+  const content = document.getElementById("content").value.trim();
+  if (!title || !content) return alert("Please fill out both fields");
 
-async function pinnedNote(id) {
   try {
-    const res = await fetch(`/notes/${id}/pin`, { method: 'PUT' });
-    if (!res.ok) throw new Error('Pin failed');
-    await loadNotes();
+    if (editingId) {
+      await fetch(`${API_URL}/${editingId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, content }),
+      });
+      editingId = null;
+      document.getElementById("addBtn").textContent = "Add";
+    } else {
+      await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ title, content }),
+      });
+    }
+
+    document.getElementById("title").value = "";
+    document.getElementById("content").value = "";
+    loadNotes();
   } catch (err) {
-    console.error(err);
+    console.error("Error creating/updating note:", err);
   }
 }
 
-async function updateNote(id) {
-  window.location.href=`create.html?id=${id}`;
+// Edit note
+function editNote(note) {
+  document.getElementById("title").value = note.title;
+  document.getElementById("content").value = note.content;
+  editingId = note._id;
+  document.getElementById("addBtn").textContent = "Save";
+  document.getElementById("title").focus();
 }
 
-
+// Delete note
 async function deleteNote(id) {
-  console.log('Deleting note:', id);
   try {
-    const res = await fetch(`/notes/${id}`, { method: 'DELETE' });
-    if (!res.ok) throw new Error('Delete failed');
-    await loadNotes();
+    await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+    if (editingId === id) {
+      document.getElementById("title").value = "";
+      document.getElementById("content").value = "";
+      editingId = null;
+      document.getElementById("addBtn").textContent = "Add";
+    }
+    loadNotes();
   } catch (err) {
-    console.error(err);
+    console.error("Error deleting note:", err);
   }
 }
 
-window.onload = loadNotes;
+// Toggle pin
+async function togglePin(id) {
+  try {
+    await fetch(`${API_URL}/${id}/pin`, { method: "PATCH" });
+    loadNotes();
+  } catch (err) {
+    console.error("Error toggling pin:", err);
+  }
+}
+
+// Event listeners
+document.getElementById("addBtn").addEventListener("click", createOrUpdateNote);
+document.addEventListener("DOMContentLoaded", loadNotes);

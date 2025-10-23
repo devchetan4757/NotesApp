@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/921214368d.js" crossorigin="anonymous"></script>
+  <title>Notes App</title>
   <link rel="stylesheet" href="style.css">
-  <title>NotesApp</title>
 </head>
 <body>
+  <div class="container">
+    <h1>Notes App</h1>
 
-  <h1>Notes</h1>
+    <!-- Note Input Form -->
+    <form id="noteForm" onsubmit="event.preventDefault()" class="note-input">
+      <input id="title" type="text" placeholder="Note title" required />
+      <textarea id="content" placeholder="Write your note..." rows="4" required></textarea>
+      <button id="addBtn">Add</button>
+    </form>
 
-  <label id="saved">Saved Notes</label>
-  <div id="notesContainer"> </div>
-    <label id="blank">Add a note</label>
-
-  <button id="add" onclick="window.location.href='create.html'">
-    <label id="plus">+</label>
-  </button>
+    <h2>Your Notes</h2>
+    <div id="notes" class="notes-list"></div>
+  </div>
 
   <script src="script.js"></script>
 </body>
